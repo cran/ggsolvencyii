@@ -1,0 +1,781 @@
+## GNU General Public License version 3 , see file LICENCE ============== =====
+##
+##    sourcefile of package 'ggsolvencyii'
+##    Copyright (C) <2018>  < Marco van Zanden , git@vanzanden.nl >
+##
+##    This program is free software: you can redistribute it and/or modify
+##    it under the terms of the GNU General Public License as published by
+##    the Free Software Foundation, either version 3 of the License, or
+##    (at your option) any later version.
+##
+##    This program is distributed in the hope that it will be useful,
+##    but WITHOUT ANY WARRANTY; without even the implied warranty of
+##    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+##    GNU General Public License for more details.
+##
+##    You should have received a copy of the GNU General Public License
+##    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+##
+## ====================================================================== =====
+## sii_x_fillcolors_sf16_eng ============================================ =====
+#' sii_x_fillcolors_sf16_eng
+#'
+#' a colorset, as named list, where each accumulationlevel and each type of risk has it's own color, where ".._other" has the same color as the "motherlevel", i.e. 'market_other' has the same color as 'market' while other 'm_..' risks have a different hue.
+#'
+#' @docType data
+#'
+#' @source
+#'   made with \code{preparingtables.R} (not included in this package) which can be found on \href{https://github.com/vanzanden/ggsolvencyii/tree/master/_data_helperfiles}{github.com/vanzanden/ggsolvencyii}
+#'
+#' @format A list with items in the form "\emph{description}"= "#\emph{colorcode}":
+#' @examples
+#' installedtable <- sii_x_fillcolors_sf16_eng
+#' installedtable
+ "sii_x_fillcolors_sf16_eng"
+
+## sii_x_edgecolors_sf16_eng ============================================ =====
+#' sii_x_edgecolors_sf16_eng
+#'
+#' a colorset, as named list, where each risk has the edgecolor of the "motherlevel", as defined in the \code{..fillcolors..} variable.
+#'
+#' @docType data
+#'
+#' @source
+#'   made with \code{preparingtables.R} (not included in this package) which can be found on \href{https://github.com/vanzanden/ggsolvencyii/tree/master/_data_helperfiles}{github.com/vanzanden/ggsolvencyii}
+#'
+#' @format A list with items in the form "\emph{description}"= "#\emph{colorcode}":
+
+#' @examples
+#' installedtable <- sii_x_edgecolors_sf16_eng
+#' installedtable
+"sii_x_edgecolors_sf16_eng"
+
+
+## sii_x_fillcolors_sf16_nld ============================================ =====
+#' sii_x_fillcolors_sf16_nld
+#'
+#' a colorset, as named list, where each accumulationlevel and each type of risk has it's own color, where ".._other" has the same color as the "motherlevel", i.e. 'market_other' has the same color as 'market' while other 'm_..' risks have a different hue.
+#'
+#' @docType data
+#'
+#' @source
+#'   made with \code{preparingtables.R} (not included in this package) which can be found on \href{https://github.com/vanzanden/ggsolvencyii/tree/master/_data_helperfiles}{github.com/vanzanden/ggsolvencyii}
+#'
+#' @format A list with items in the form "\emph{description}"= "#\emph{colorcode}":
+#' @examples
+#' installedtable <- sii_x_fillcolors_sf16_nld
+#' installedtable
+"sii_x_fillcolors_sf16_nld"
+
+## sii_x_edgecolors_sf16_nld ============================================ =====
+#' sii_x_edgecolors_sf16_nld
+#'
+#' a colorset, as named list, where each risk has the edgecolor of the "motherlevel", as defined in the \code{..fillcolors..} variable.
+#'
+#' @docType data
+#'
+#' @source
+#'   made with \code{preparingtables.R} (not included in this package) which can be found on \href{https://github.com/vanzanden/ggsolvencyii/tree/master/_data_helperfiles}{github.com/vanzanden/ggsolvencyii}
+#'
+#' @format A list with items in the form "\emph{description}"= "#\emph{colorcode}":
+
+#' @examples
+#' installedtable <- sii_x_edgecolors_sf16_nld
+#' installedtable
+"sii_x_edgecolors_sf16_nld"
+
+## sii_structure_sf16_eng =============================================== =====
+#' sii_structure_sf16_eng
+#'
+#' a standard formula structure (as of 2016), with descriptions in English.
+#'
+#' @docType data
+#'
+#' @source determined based on specification of EIOPA standard formula Solvency II structure. \cr
+#'   made from excel-file in \href{https://github.com/vanzanden/ggsolvencyii/tree/master/_data_helperfiles}{github.com/vanzanden}, from there transfered to R environment with code in \code{preparingtables.R}.
+#'
+#' @format A data frame with columns:
+#' \describe{
+#'           \item{description}{string: the name of the component}
+#'           \item{level}{string with format \emph{'level(numeric)' [<point> 'sublevel(numeric)'] ['d']} i.e. 1, 2.01, 3.1d where d indicates a diversification component}
+#'           \item{childlevel}{string, same format as level, indicating the level of which the components combine into this level }
+#'          }
+#'
+#' @examples
+#' installedtable <- sii_structure_sf16_eng
+#' installedtable
+"sii_structure_sf16_eng"
+
+## sii_structure_sf16_nld =============================================== =====
+#' sii_structure_sf16_nld
+#'
+#' a standard formula structure (as of 2016), with descriptions in Dutch.
+#'
+#' @docType data
+#'
+#' @source determined based on specification of EIOPA standard formula Solvency II structure. \cr
+#'   made from excel-file in \href{https://github.com/vanzanden/ggsolvencyii/tree/master/_data_helperfiles}{github.com/vanzanden}, from there transfered to R environment with code in \code{preparingtables.R}.
+#'
+#' @format A data frame with columns:
+#' \describe{
+#'           \item{description}{string: the name of the component}
+#'           \item{level}{string with format \emph{'level(numeric)' [<point> 'sublevel(numeric)'] ['d']} i.e. 1, 2.01, 3.1d where d indicates a diversification component}
+#'           \item{childlevel}{string, same format as level, indicating the level of which the components combine into this level }
+#'          }
+#'
+#' @examples
+#' installedtable <- sii_structure_sf16_nld
+#' installedtable
+"sii_structure_sf16_nld"
+
+
+
+## sii_levelmax_sf16_995 ================================================ =====
+#' sii_levelmax_sf16_995
+#'
+#' maximum number of items in a level, 99 items for levels 1-3
+#' (SCR, BSCR/OR/ADJ, Market/life/... risks) and 5 items for lowerlevel risk
+#' (equity/longevity/...) in a standard formula structure.
+#'
+#' @docType data
+#'
+#' @source
+#'   made from excel-file in \href{https://github.com/vanzanden/ggsolvencyii/tree/master/_data_helperfiles}{github.com/vanzanden}, from there transfered to R environment with code in \code{preparingtables.R}.
+#'
+#' @format A data frame with columns:
+#' \describe{
+#'           \item{level}{string with format \emph{'level(numeric)' [<point> 'sublevel(numeric)'] ['d']} i.e. 1, 2.01, 3.1d where d indicates a diversification component}
+#'           \item{levelmax}{positive integer indicating the total number of components to be shown in a level, consisting of the x-1 largest components and the remaining components combined in one other}
+#'          }
+#'
+#'
+#' @examples
+#' installedtable <- sii_levelmax_sf16_995
+#' installedtable
+"sii_levelmax_sf16_995"
+
+## sii_levelmax_sf16_993 ================================================ =====
+#' sii_levelmax_sf16_993
+#'
+#' maximum number of items in a level, 99 items for levels 1-3 (SCR, BSCR/OR/ADJ, Market/life/... risks) and 3 items for lowerlevel risk (equity/longevity/...) in a standard formula structure.
+#'
+#'
+#' @docType data
+# '
+#' @source
+#'   made from excel-file in \href{https://github.com/vanzanden/ggsolvencyii/tree/master/_data_helperfiles}{github.com/vanzanden} :
+#'
+#' @format A data frame with columns:
+#' \describe{
+#'           \item{level}{string with format \emph{'level(numeric)' [<point> 'sublevel(numeric)'] ['d']} i.e. 1, 2.01, 3.1d where d indicates a diversification component}
+#'           \item{levelmax}{positive integer indicating the total number of components to be shown in a level, consisting of the x-1 largest components and the remaining components combined in one other}
+#'          }
+#'
+#'
+#' @examples
+#' installedtable <- sii_levelmax_sf16_993
+#' installedtable
+"sii_levelmax_sf16_993"
+
+
+## sii_plotdetails_sf16 ================================================= =====
+#' sii_plotdetails_sf16
+#'
+#' A table for \code{\link{geom_sii_risksurface}} and \code{\link{geom_sii_riskoutline}} indicating which outlines of each item should be shown, specified per level and/or description. the latter overrule the former. \cr
+#' when defining an item (or the \code{squared = TRUE} transformation) 4 lines can be distinguised, a radialline going outwards, a circle segment (clockwise), a radialline going inwards, a circle segment (counterclockwise). These are numbered as outline1 to outline4.
+#'
+#' @docType data
+#'
+#' @source determined based on specification of EIOPA standard formula Solvency II structure
+#'   made from excel-file in \href{https://github.com/vanzanden/ggsolvencyii/tree/master/_data_helperfiles}{github.com/vanzanden}, from there transfered to R environment with code in \code{preparingtables.R}.
+#'
+#' @format A data frame with columns:
+#' \describe{
+#'            \item{levelordescription}{string with format \emph{'level(numeric)' [<point> 'sublevel(numeric)'] ['d']} i.e. 1, 2.01, 3.1d where d indicates a diversification component \strong{AND/OR} description(s) from the corresponding structure }
+#'            \item{surface}{boolean (logical): the surface }
+#'            \item{outline1}{boolean (logical): the radial line }
+#'            \item{outline2}{boolean (logical): the outer line  }
+#'            \item{outline3}{boolean (logical): the radial line  }
+#'            \item{outline4}{boolean (logical): the inner line }
+#'            \item{outline11}{NOT YET IMPLEMENTED: boolean (logical): analogue to outline1, but but only for the first plotted component of that level. The components in each  level are plotted clockwise}
+#'            \item{outline13}{NOT YET IMPLEMENTED: boolean (logical): analogue to outline3, but but only for the last plotted component of that level. }
+#'          }
+#'
+#' @examples
+#' installedtable <- sii_plotdetails_sf16
+#' installedtable
+"sii_plotdetails_sf16"
+
+
+
+
+
+
+
+
+## sii_z_ex1_data ======================================================= =====
+#' sii_z_ex1_data
+#'
+#' example dataset, in tidyverse format, for the showcase of a limited structure.
+#'
+#' @docType data
+#'
+#' @source loosely based on public SFCR report of a medium sized dutch life insurer
+#'   made from excel-file in \href{https://github.com/vanzanden/ggsolvencyii/tree/master/_data_helperfiles}{github.com/vanzanden}, from there transfered to R environment with code in \code{preparingtables.R}.
+#'
+#' @format A data frame with columns:
+#' \describe{
+#'            \item{time}{numerical: a representation of an x value: \cr The x aesthetic could also be a normal numbering, or a longitude}
+#'            \item{ratio}{numerical: solvency II ratio, a representation of an y value: \cr y aesthetic could also be a lattitude}
+#'            \item{description}{character: component of the structure}
+#'            \item{id}{ number: a grouping item}
+#'            \item{value}{numerical: positive for risks, negative for diversification effects}
+#'            \item{comparewithid}{numerical: a reference to the id of another datapoint }#'          }
+#'
+#' @examples
+#' installedtable <- sii_z_ex1_data
+#' installedtable
+"sii_z_ex1_data"
+
+
+## sii_z_ex1_structure ================================================== =====
+#' sii_z_ex1_structure
+#'
+#' a adapted (compact) structure, for a life-insurer with only  market and life risk and their subrisks
+#'
+#' @docType data
+#'
+#' @source determined based on specification of EIOPA standard formula Solvency II structure
+#'   made from excel-file in \href{https://github.com/vanzanden/ggsolvencyii/tree/master/_data_helperfiles}{github.com/vanzanden}, from there transfered to R environment with code in \code{preparingtables.R}.
+#'
+#' @format A data frame with columns:
+#' \describe{
+#'           \item{description}{string: the name of the component, or a diversification}
+#'           \item{level}{string with format \emph{'level(numeric)' [<point> 'sublevel(numeric)'] ['d']} i.e. 1, 2.01, 3.1d where d indicates a diversification component}
+#'           \item{childlevel}{string of the same format as level, indicating the level of which the components make up this item }
+#'          }
+#'
+#' @examples
+#' installedtable <- sii_z_ex1_structure
+#' installedtable
+"sii_z_ex1_structure"
+
+
+
+## sii_z_ex1_fillcolors ================================================= =====
+#' sii_z_ex1_fillcolors
+#'
+#' a colorset, as named list, where each accumulationlevel and each type of risk has it's own color, where ".._other" has the same color as the "motherlevel", i.e. 'market_other' has the same color as 'market' while other 'm_..' risks have a different hue.
+#'
+#' @docType data
+#'
+#' @source
+#'   made with \code{preparingtables.R} (not included in this package) which can be found on \href{https://github.com/vanzanden/ggsolvencyii/tree/master/_data_helperfiles}{github.com/vanzanden/ggsolvencyii}
+#'
+#' @format A list with items in the form "\emph{description}"= "#\emph{colorcode}":
+#' @examples
+#' installedtable <- sii_z_ex1_fillcolors
+#' installedtable
+"sii_z_ex1_fillcolors"
+
+## sii_z_ex1_edgecolors ================================================= =====
+#' sii_z_ex1_edgecolors
+#'
+#' a colorset, as named list, where each risk has the edgecolor of the "motherlevel", as defined in the \code{..fillcolors..} variable.
+#'
+#' @docType data
+#'
+#' @source
+#'   made with \code{preparingtables.R} (not included in this package) which can be found on \href{https://github.com/vanzanden/ggsolvencyii/tree/master/_data_helperfiles}{github.com/vanzanden/ggsolvencyii}
+#'
+#' @format A list with items in the form "\emph{description}"= "#\emph{colorcode}":
+
+#' @examples
+#' installedtable <- sii_z_ex1_edgecolors
+#' installedtable
+"sii_z_ex1_edgecolors"
+
+
+## sii_z_ex1_levelmax =================================================== =====
+#' sii_z_ex1_levelmax
+#'
+# ' tekst
+#' maximum number of items in a level, 99 items for levels 1-3 (SCR, BSCR/OR/ADJ, Market/life/... risks) and 3 items for lowerlevel risk (equity/longevity/...)
+#'
+# ' @docType data
+#'
+#' @source
+#'   made from excel-file in \href{https://github.com/vanzanden/ggsolvencyii/tree/master/_data_helperfiles}{github.com/vanzanden}, from there transfered to R environment with code in \code{preparingtables.R}.
+#'
+#' @format A data frame with columns:
+# ' \describe{
+# '           \item{level}{string with format \emph{'level(numeric)' [<point> 'sublevel(numeric)'] ['d']} i.e. 1, 2.01, 3.1d where d indicates a diversification component}
+# '           \item{levelmax}{positive integer indicating the total number of components to be shown in a level, consisting of the x-1 largest components and the remaining components combined in one other}
+# '          }
+#'
+#' @examples
+#' installedtable <- sii_z_ex1_levelmax
+#' installedtable
+"sii_z_ex1_levelmax"
+
+## sii_z_ex1_plotdetails ================================================ =====
+#' sii_z_ex1_plotdetails
+#' #'
+#' A table for \code{\link{geom_sii_risksurface}} and \code{\link{geom_sii_riskoutline}} indicating which outlines of each item should be shown, specified per level and/or description. the latter overrule the former. \cr
+#' when defining an item (or the \code{squared = TRUE} transformation) 4 lines can be distinguised, a radialline going outwards, a circle segment (clockwise), a radialline going inwards, a circle segment (counterclockwise). These are numbered as outline1 to outline4.
+#'
+#' @docType data
+#'
+#' @source determined based on specification of EIOPA standard formula Solvency II structure
+#'   made from excel-file in \href{https://github.com/vanzanden/ggsolvencyii/tree/master/_data_helperfiles}{github.com/vanzanden}, from there transfered to R environment with code in \code{preparingtables.R}.
+#'
+#' @format A data frame with columns:
+#' \describe{
+#'            \item{levelordescription}{string with format \emph{'level(numeric)' [<point> 'sublevel(numeric)'] ['d']} i.e. 1, 2.01, 3.1d where d indicates a diversification component \strong{AND/OR} description(s) from the corresponding structure }
+#'            \item{surface}{boolean (logical): the surface }
+#'            \item{outline1}{boolean (logical): the radial line }
+#'            \item{outline2}{boolean (logical): the outer line  }
+#'            \item{outline3}{boolean (logical): the radial line  }
+#'            \item{outline4}{boolean (logical): the inner line }
+#'            \item{outline11}{NOT YET IMPLEMENTED: boolean (logical): analogue to outline1, but but only for the first plotted component of that level. The components in each  level are plotted clockwise}
+#'            \item{outline13}{NOT YET IMPLEMENTED: boolean (logical): analogue to outline3, but but only for the last plotted component of that level. }
+#'          }
+#'
+#' @examples
+#' installedtable <- sii_z_ex1_plotdetails
+#' installedtable
+"sii_z_ex1_plotdetails"
+
+## sii_z_ex1_plotdetails2 =============================================== =====
+#' sii_z_ex1_plotdetails2
+#' #'
+#' A table for \code{\link{geom_sii_risksurface}} and \code{\link{geom_sii_riskoutline}} indicating which outlines of each item should be shown, specified per level and/or description. the latter overrule the former. \cr
+#' when defining an item (or the \code{squared = TRUE} transformation) 4 lines can be distinguised, a radialline going outwards, a circle segment (clockwise), a radialline going inwards, a circle segment (counterclockwise). These are numbered as outline1 to outline4.
+#'
+#' @docType data
+#'
+#' @source determined based on specification of EIOPA standard formula Solvency II structure
+#'   made from excel-file in \href{https://github.com/vanzanden/ggsolvencyii/tree/master/_data_helperfiles}{github.com/vanzanden}, from there transfered to R environment with code in \code{preparingtables.R}.
+#'
+#' @format A data frame with columns:
+#' \describe{
+#'            \item{levelordescription}{string with format \emph{'level(numeric)' [<point> 'sublevel(numeric)'] ['d']} i.e. 1, 2.01, 3.1d where d indicates a diversification component \strong{AND/OR} description(s) from the corresponding structure }
+#'            \item{surface}{boolean (logical): the surface }
+#'            \item{outline1}{boolean (logical): the radial line }
+#'            \item{outline2}{boolean (logical): the outer line  }
+#'            \item{outline3}{boolean (logical): the radial line  }
+#'            \item{outline4}{boolean (logical): the inner line }
+#'            \item{outline11}{NOT YET IMPLEMENTED: boolean (logical): analogue to outline1, but but only for the first plotted component of that level. The components in each  level are plotted clockwise}
+#'            \item{outline13}{NOT YET IMPLEMENTED: boolean (logical): analogue to outline3, but but only for the last plotted component of that level. }
+#'          }
+#'
+#' @examples
+#' installedtable <- sii_z_ex1_plotdetails2
+#' installedtable
+"sii_z_ex1_plotdetails2"
+
+## sii_z_ex2_data ======================================================= =====
+#' sii_z_ex2_data
+#'
+#' example dataset, in tidyverse format, with only one instance of a limited filled sf structure.
+#'
+#' @docType data
+#'
+#' @source loosely based on public SFCR report of a medium sized dutch life insurer
+#'   made from excel-file in \href{https://github.com/vanzanden/ggsolvencyii/tree/master/_data_helperfiles}{github.com/vanzanden}, from there transfered to R environment with code in \code{preparingtables.R}.
+#'
+#' @format A data frame with columns:
+#' \describe{
+#'            \item{time}{numerical: a representation of an x value: \cr The x aesthetic could also be a normal numbering, or a longitude}
+#'            \item{ratio}{numerical: solvency II ratio, a representation of an y value: \cr y aesthetic could also be a lattitude}
+#'            \item{description}{character: component of the structure}
+#'            \item{id}{ number: a grouping item}
+#'            \item{value}{numerical: positive for risks, negative for diversification effects}
+#'          }
+#'
+#' @examples
+#' installedtable <- sii_z_ex2_data
+#' installedtable
+"sii_z_ex2_data"
+
+
+
+## sii_z_ex3_data ======================================================= =====
+#' sii_z_ex3_data
+#'
+#' example dataset, in tidyverse format, with all columns of the complete SF16 structure present in the data but with only a few risks filled with non-zero values,
+#'
+#' @docType data
+#'
+#' @source loosely based on public SFCR report of a medium sized dutch life insurer
+#'   made from excel-file in \href{https://github.com/vanzanden/ggsolvencyii/tree/master/_data_helperfiles}{github.com/vanzanden}, from there transfered to R environment with code in \code{preparingtables.R}.
+
+#' @format A data frame with columns:
+#' \describe{
+#'            \item{time}{numerical: a representation of an x value: \cr The x aesthetic could also be a normal numbering, or a longitude}
+#'            \item{ratio}{numerical: solvency II ratio, a representation of an y value: \cr y aesthetic could also be a lattitude}
+#'            \item{description}{character: component of the structure}
+#'            \item{id}{ number: a grouping item}
+#'            \item{value}{numerical: positive for risks, negative for diversification effects}
+#'            \item{comparewithid}{numerical: a reference to the id of another datapoint }
+#'          }
+#'
+#' @examples
+#' installedtable <- sii_z_ex3_data
+#' installedtable
+"sii_z_ex3_data"
+
+
+## sii_z_ex3_plotdetails ================================================ =====
+#' sii_z_ex3_plotdetails
+#' #'
+#' A table for \code{\link{geom_sii_risksurface}} and \code{\link{geom_sii_riskoutline}} indicating which outlines of each item should be shown, specified per level and/or description. the latter overrule the former. \cr
+#' when defining an item (or the \code{squared = TRUE} transformation) 4 lines can be distinguised, a radialline going outwards, a circle segment (clockwise), a radialline going inwards, a circle segment (counterclockwise). These are numbered as outline1 to outline4.
+#'
+#' @docType data
+#'
+#' @source determined based on specification of EIOPA standard formula Solvency II structure
+#'   made from excel-file in \href{https://github.com/vanzanden/ggsolvencyii/tree/master/_data_helperfiles}{github.com/vanzanden}, from there transfered to R environment with code in \code{preparingtables.R}.
+#'
+#' @format A data frame with columns:
+#' \describe{
+#'            \item{levelordescription}{string with format \emph{'level(numeric)' [<point> 'sublevel(numeric)'] ['d']} i.e. 1, 2.01, 3.1d where d indicates a diversification component \strong{AND/OR} description(s) from the corresponding structure }
+#'            \item{surface}{boolean (logical): the surface }
+#'            \item{outline1}{boolean (logical): the radial line }
+#'            \item{outline2}{boolean (logical): the outer line  }
+#'            \item{outline3}{boolean (logical): the radial line  }
+#'            \item{outline4}{boolean (logical): the inner line }
+#'            \item{outline11}{NOT YET IMPLEMENTED: boolean (logical): analogue to outline1, but but only for the first plotted component of that level. The components in each  level are plotted clockwise}
+#'            \item{outline13}{NOT YET IMPLEMENTED: boolean (logical): analogue to outline3, but but only for the last plotted component of that level. }
+#'          }
+#'
+#' @examples
+#' installedtable <- sii_z_ex3_plotdetails
+#' installedtable
+"sii_z_ex3_plotdetails"
+
+
+
+## sii_z_ex4_data ======================================================= =====
+#' sii_z_ex4_data
+#'
+#' example dataset, in tidyverse format, with several instances of a filled sf structure,
+#'
+#' @docType data
+#'
+#' @source based on public SFCR 2017 reports of a medium sized dutch life insurer in Oosterhout
+#'   made from excel-file in \href{https://github.com/vanzanden/ggsolvencyii/tree/master/_data_helperfiles}{github.com/vanzanden}, from there transfered to R environment with code in \code{preparingtables.R}.
+#'
+#'
+#' @format A data frame with columns:
+#' \describe{
+#'            \item{time}{numerical: a representation of an x value: \cr The x aesthetic could also be a normal numbering, or a longitude}
+#'            \item{ratio}{numerical: solvency II ratio, a representation of an y value: \cr y aesthetic could also be a lattitude}
+#'            \item{description}{character: component of the structure}
+#'            \item{id}{ number: a grouping item}
+#'            \item{value}{numerical: positive for risks, negative for diversification effects}
+#'            \item{comparewithid}{numerical: a reference to the id of another datapoint }#'          }
+#'
+#' @examples
+#' installedtable <- sii_z_ex4_data
+#' installedtable
+"sii_z_ex4_data"
+
+## sii_z_ex4_structure ================================================== =====
+#' sii_z_ex4_structure
+#'
+#' a adapted (compact) structure with no division of market, life, .. risks in subrisks (i.e. equity, longevity,... ). Descriptions are in English
+#'
+#' @docType data
+#'
+#' @source determined based on specification of EIOPA standard formula Solvency II structure
+#'   made from excel-file in \href{https://github.com/vanzanden/ggsolvencyii/tree/master/_data_helperfiles}{github.com/vanzanden}, from there transfered to R environment with code in \code{preparingtables.R}.
+#'
+#' @format A data frame with columns:
+#' \describe{
+#'           \item{description}{string: the name of the component, or a diversification}
+#'           \item{level}{string with format \emph{'level(numeric)' [<point> 'sublevel(numeric)'] ['d']} i.e. 1, 2.01, 3.1d where d indicates a diversification component}
+#'           \item{childlevel}{string of the same format as level, indicating the level of which the components make up this item }
+#'          }
+#'
+#' @examples
+#' installedtable <- sii_z_ex4_structure
+#' installedtable
+"sii_z_ex4_structure"
+
+
+
+## sii_z_ex4_levelmax =================================================== =====
+#' sii_z_ex4_levelmax
+#'
+# ' tekst
+#' maximum number of items in a level, 99 items for levels 1-3 (SCR, BSCR/OR/ADJ, Market/life/... risks) and 3 items for lowerlevel risk (equity/longevity/...)
+#'
+# ' @docType data
+#'
+#' @source
+#'   made from excel-file in \href{https://github.com/vanzanden/ggsolvencyii/tree/master/_data_helperfiles}{github.com/vanzanden}, from there transfered to R environment with code in \code{preparingtables.R}.
+#'
+#' @format A data frame with columns:
+# ' \describe{
+# '           \item{level}{string with format \emph{'level(numeric)' [<point> 'sublevel(numeric)'] ['d']} i.e. 1, 2.01, 3.1d where d indicates a diversification component}
+# '           \item{levelmax}{positive integer indicating the total number of components to be shown in a level, consisting of the x-1 largest components and the remaining components combined in one other}
+# '          }
+#'
+#' @examples
+#' installedtable <- sii_z_ex4_levelmax
+#' installedtable
+"sii_z_ex4_levelmax"
+
+
+
+
+
+## sii_z_ex6_data ======================================================= =====
+#' sii_z_ex6_data
+#'
+#' example dataset of a internal model of a large Dutch insurer (NN group). Values are fictious
+#'
+#' @docType data
+#'
+#' @source the structure is based on public SFCR 2017 report of NN group,
+#'   with a possible wrong interpretation of diversification effects towards 'market basis and CPD risk'\cr
+#'   #' See \href{https://preview.tinyurl.com/ggsolvencyii-001}{preview.tinyurl.com/ggsolvencyii-001}, page 33 linking to
+#'   www.nn-group.com /nn-group /file?uuid=e3e89829 -e7bd -495a -9fed
+#'   -4bc54a9349eb&owner =c5df72fd -8a65 -4f75 -956d -5e37307aa50c &contentid =2311 \cr
+#'   made from excel-file in \href{https://github.com/vanzanden/ggsolvencyii/tree/master/_data_helperfiles}{github.com/vanzanden},
+#'   from there transfered to R environment with code in \code{preparingtables.R} in the same directory.
+#'
+#' @format A data frame with columns:
+#' \describe{
+#'            \item{time}{numerical: a representation of an x value: \cr The x aesthetic could also be a normal numbering, or a longitude}
+#'            \item{ratio}{numerical: solvency II ratio, a representation of an y value: \cr y aesthetic could also be a lattitude}
+#'            \item{description}{character: component of the structure}
+#'            \item{id}{ number: a grouping item}
+#'            \item{value}{numerical: positive for risks, negative for diversification effects}
+#'            \item{comparewithid}{numerical: a reference to the id of another datapoint }
+#'          }
+#'
+#' @examples
+#' installedtable <- sii_z_ex6_data
+#' installedtable
+"sii_z_ex6_data"
+
+## sii_z_ex6_data2 ====================================================== =====
+#' sii_z_ex6_data2
+#'
+#' example dataset of a internal model of a large Dutch insurer (NN group). Values are fictious. \cr
+#'   To show 'counterparty default risk (CPD)' separate from the two components
+#'   'type 1' and 'type 2' the following assumption is made: The (fictious)
+#'   diversification towards the higher level from CPD risk is transferred
+#'   to a position between CPD and its two components.
+#'   A similar approach is used to show 'business risk',
+#'   'life risk', 'morbidity risk' and 'non-life risk'
+#'   and their (7,4,4 and 4) components
+#'
+#' @docType data
+#'
+#' @source the structure is based on public SFCR 2017 report of NN group,
+#'   with a possible wrong interpretation of diversification effects towards 'market basis and CPD risk' \cr#'
+#'   See \href{https://preview.tinyurl.com/ggsolvencyii-001}{preview.tinyurl.com/ggsolvencyii-001}, page 33 linking to
+#'   www.nn-group.com/ nn-group/file? uuid=e3e89829 -e7bd -495a -9fed
+#'   -4bc54a9349eb&owner =c5df72fd -8a65 -4f75 -956d -5e37307aa50c &contentid =2311
+#'   made from excel-file in \href{https://github.com/vanzanden/ggsolvencyii/tree/master/_data_helperfiles}{github.com/vanzanden},
+#'   from there transfered to R environment with code in \code{preparingtables.R} in the same directory.
+#'
+#' @format A data frame with columns:
+#' \describe{
+#'            \item{time}{numerical: a representation of an x value: \cr The x aesthetic could also be a normal numbering, or a longitude}
+#'            \item{ratio}{numerical: solvency II ratio, a representation of an y value: \cr y aesthetic could also be a lattitude}
+#'            \item{description}{character: component of the structure}
+#'            \item{id}{ number: a grouping item}
+#'            \item{value}{numerical: positive for risks, negative for diversification effects}
+#'            \item{comparewithid}{numerical: a reference to the id of another datapoint }#'          }
+#'
+#' @examples
+#' installedtable <- sii_z_ex6_data2
+#' installedtable
+"sii_z_ex6_data2"
+
+## sii_z_ex6_structure ================================================== =====
+#' sii_z_ex6_structure
+#'
+#' a standard formula structure (as of 2016), with descriptions in English.
+#'
+#' @docType data
+#'
+#' @source determined based on specification of EIOPA standard formula Solvency II structure. \cr
+#'   made from excel-file in \href{https://github.com/vanzanden/ggsolvencyii/tree/master/_data_helperfiles}{github.com/vanzanden}, from there transfered to R environment with code in \code{preparingtables.R}.
+#'
+#' @format A data frame with columns:
+#' \describe{
+#'           \item{description}{string: the name of the component}
+#'           \item{level}{string with format \emph{'level(numeric)' [<point> 'sublevel(numeric)'] ['d']} i.e. 1, 2.01, 3.1d where d indicates a diversification component}
+#'           \item{childlevel}{string, same format as level, indicating the level of which the components combine into this level }
+#'          }
+#'
+#' @examples
+#' installedtable <- sii_z_ex6_structure
+#' installedtable
+"sii_z_ex6_structure"
+
+
+## sii_z_ex6_fillcolors ================================================= =====
+#' sii_z_ex6_fillcolors
+#'
+#' a colorset, as named list, where each accumulation-level and each type of risk has it's own color, where ".._other" has the same color as the "motherlevel", i.e. 'market_other' has the same color as 'market' while other 'm_..' risks have a different hue.
+#'
+#' @docType data
+#'
+#' @source
+#'   made with \code{preparingtables.R} (not included in this package) which can be found on \href{https://github.com/vanzanden/ggsolvencyii/tree/master/_data_helperfiles}{github.com/vanzanden/ggsolvencyii}
+#'
+#' @format A list with items in the form "\emph{description}"= "#\emph{colorcode}":
+#' @examples
+#' installedtable <- sii_z_ex6_fillcolors
+#' installedtable
+"sii_z_ex6_fillcolors"
+
+## sii_z_ex6_edgecolors ================================================= =====
+#' sii_z_ex6_edgecolors
+#'
+#' a colorset, as named list, where each risk has the edgecolor of the "motherlevel", as defined in the \code{..fillcolors..} variable.
+#'
+#' @docType data
+#'
+#' @source
+#'   made with \code{preparingtables.R} (not included in this package) which can be found on \href{https://github.com/vanzanden/ggsolvencyii/tree/master/_data_helperfiles}{github.com/vanzanden/ggsolvencyii}
+#'
+#' @format A list with items in the form "\emph{description}"= "#\emph{colorcode}":
+
+#' @examples
+#' installedtable <- sii_z_ex6_edgecolors
+#' installedtable
+"sii_z_ex6_edgecolors"
+
+
+## sii_z_ex6_levelmax =================================================== =====
+#' sii_z_ex6_levelmax
+#'
+# ' tekst
+#' maximum number of items in a level, 99 items for levels 1-3 (SCR, BSCR/OR/ADJ, Market/life/... risks) and 3 items for lowerlevel risk (equity/longevity/...)
+#'
+# ' @docType data
+#'
+#' @source
+#'   made from excel-file in \href{https://github.com/vanzanden/ggsolvencyii/tree/master/_data_helperfiles}{github.com/vanzanden}, from there transfered to R environment with code in \code{preparingtables.R}.
+#'
+#' @format A data frame with columns:
+# ' \describe{
+# '           \item{level}{string with format \emph{'level(numeric)' [<point> 'sublevel(numeric)'] ['d']} i.e. 1, 2.01, 3.1d where d indicates a diversification component}
+# '           \item{levelmax}{positive integer indicating the total number of components to be shown in a level, consisting of the x-1 largest components and the remaining components combined in one other}
+# '          }
+#'
+#' @examples
+#' installedtable <- sii_z_ex6_levelmax
+#' installedtable
+"sii_z_ex6_levelmax"
+
+
+
+
+## sii_z_ex6_plotdetails ================================================ =====
+#' sii_z_ex6_plotdetails
+#' #'
+#' A table for \code{\link{geom_sii_risksurface}} and \code{\link{geom_sii_riskoutline}} indicating which outlines of each item should be shown, specified per level and/or description. the latter overrule the former. \cr
+#' when defining an item (or the \code{squared = TRUE} transformation) 4 lines can be distinguished, a radialline going outwards, a circle segment (clockwise), a radialline going inwards, a circle segment (counterclockwise). These are numbered as outline1 to outline4.
+#'
+#' @docType data
+#'
+#' @source determined based on specification of EIOPA standard formula Solvency II structure
+#'   made from excel-file in \href{https://github.com/vanzanden/ggsolvencyii/tree/master/_data_helperfiles}{github.com/vanzanden}, from there transfered to R environment with code in \code{preparingtables.R}.
+#'
+#' @format A data frame with columns:
+#' \describe{
+#'            \item{levelordescription}{string with format \emph{'level(numeric)' [<point> 'sublevel(numeric)'] ['d']} i.e. 1, 2.01, 3.1d where d indicates a diversification component \strong{AND/OR} description(s) from the corresponding structure }
+#'            \item{surface}{boolean (logical): the surface }
+#'            \item{outline1}{boolean (logical): the radial line }
+#'            \item{outline2}{boolean (logical): the outer line  }
+#'            \item{outline3}{boolean (logical): the radial line  }
+#'            \item{outline4}{boolean (logical): the inner line }
+#'            \item{outline11}{NOT YET IMPLEMENTED: boolean (logical): analogue to outline1, but but only for the first plotted component of that level. The components in each  level are plotted clockwise}
+#'            \item{outline13}{NOT YET IMPLEMENTED: boolean (logical): analogue to outline3, but but only for the last plotted component of that level. }
+#'          }
+#'
+#' @examples
+#' installedtable <- sii_z_ex6_plotdetails
+#' installedtable
+"sii_z_ex6_plotdetails"
+
+## sii_z_ex7_data ======================================================= =====
+#' sii_z_ex7_data
+#'
+#' example dataset, in tidyverse format, with all columns of the complete SF16 structure present in the data but with only a few risks filled with non-zero values,
+#'
+#' @docType data
+#'
+#' @source loosely based on public SFCR report of a medium sized dutch life insurer
+#'   made from excel-file in \href{https://github.com/vanzanden/ggsolvencyii/tree/master/_data_helperfiles}{github.com/vanzanden}, from there transfered to R environment with code in \code{preparingtables.R}.
+
+#' @format A data frame with columns:
+#' \describe{
+#'            \item{tijd}{numerical: a representation of an x value: \cr The x aesthetic could also be a normal numbering, or a longitude}
+#'            \item{ratio}{numerical: solvency II ratio, a representation of an y value: \cr y aesthetic could also be a lattitude}
+#'            \item{description}{character: component of the structure}
+#'            \item{id}{ number: a grouping item}
+#'            \item{waarde}{numerical: positive for risks, negative for diversification effects}
+#'            \item{vergelijkmet}{numerical: a reference to the id of another datapoint }#'          }
+#'
+#' @examples
+#' installedtable <- sii_z_ex7_data
+#' installedtable
+"sii_z_ex7_data"
+
+## sii_z_ex7_plotdetails ================================================ =====
+#' sii_z_ex7_plotdetails
+#' #'
+#' A table for \code{\link{geom_sii_risksurface}} and \code{\link{geom_sii_riskoutline}} indicating which outlines of each item should be shown, specified per level and/or description. the latter overrule the former. \cr
+#' when defining an item (or the \code{squared = TRUE} transformation) 4 lines can be distinguised, a radialline going outwards, a circle segment (clockwise), a radialline going inwards, a circle segment (counterclockwise). These are numbered as outline1 to outline4.
+#'
+#' @docType data
+#'
+#' @source determined based on specification of EIOPA standard formula Solvency II structure
+#'   made from excel-file in \href{https://github.com/vanzanden/ggsolvencyii/tree/master/_data_helperfiles}{github.com/vanzanden}, from there transfered to R environment with code in \code{preparingtables.R}.
+#'
+#' @format A data frame with columns:
+#' \describe{
+#'            \item{levelordescription}{string with format \emph{'level(numeric)' [<point> 'sublevel(numeric)'] ['d']} i.e. 1, 2.01, 3.1d where d indicates a diversification component \strong{AND/OR} description(s) from the corresponding structure }
+#'            \item{surface}{boolean (logical): the surface }
+#'            \item{outline1}{boolean (logical): the radial line }
+#'            \item{outline2}{boolean (logical): the outer line  }
+#'            \item{outline3}{boolean (logical): the radial line  }
+#'            \item{outline4}{boolean (logical): the inner line }
+#'            \item{outline11}{NOT YET IMPLEMENTED: boolean (logical): analogue to outline1, but but only for the first plotted component of that level. The components in each  level are plotted clockwise}
+#'            \item{outline13}{NOT YET IMPLEMENTED: boolean (logical): analogue to outline3, but but only for the last plotted component of that level. }
+#'          }
+#'
+#' @examples
+#' installedtable <- sii_z_ex7_plotdetails
+#' installedtable
+"sii_z_ex7_plotdetails"
+
+## sii_z_ex8_map ======================================================== =====
+# ' sii_z_ex8
+# ' #'
+# ' A map of western Europe, to show a location based geom_sii_risk...() plot
+# '
+# ' @docType data
+# '
+# ' @source stamen
+# '   made with code in \code{preparingmap.R}, located in \href{https://github.com/vanzanden/ggsolvencyii/tree/master/_data_helperfiles}{github.com/vanzanden}.
+# '
+# ' @format a ggplot2 object
+# '
+# ' @examples
+# ' installedtable <- sii_z_ex8_map
+# ' installedtable
+"sii_z_ex8_map"
+
+## ====================================================================== =====
+
+
