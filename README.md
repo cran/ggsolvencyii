@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# ggsolvencyii
+# ggsolvencyii 0.1.1
 
 <img src="vignettes/images/logo_engels_rvignettes.png" align="right" width="25%" />
 
@@ -15,13 +15,15 @@
 
 [![Travis Build
 Status](https://travis-ci.com/vanzanden/ggsolvencyii.svg?branch=master)](https://travis-ci.com/vanzanden/ggsolvencyii)
-<!-- [![Build status](https://ci.appveyor.com/api/projects/status/github/vanzanden/ggsolvencyii?branch=master)](https://ci.appveyor.com/project/vanzanden/ggsolvencyii/branch/master)-->
+[![Build
+status](https://ci.appveyor.com/api/projects/status/github/vanzanden/ggsolvencyii?branch=master)](https://ci.appveyor.com/project/vanzanden/ggsolvencyii/branch/master)
 [![cran Build
 Status](http://www.r-pkg.org/badges/version/ggsolvencyii)](https://www.r-pkg.org/pkg/ggsolvencyii)
-[![CRAN RStudio mirror
-downloads](https://cranlogs.r-pkg.org/badges/ggsolvencyii)](https://www.r-pkg.org/pkg/ggsolvencyii)
+<!--[![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/ggsolvencyii)](https://www.r-pkg.org/pkg/ggsolvencyii)-->
 [![CRAN RStudio mirror
 downloads](https://cranlogs.r-pkg.org/badges/grand-total/ggsolvencyii)](https://www.r-pkg.org/pkg/ggsolvencyii)
+[![Coverage
+status](https://codecov.io/gh/vanzanden/ggsolvencyii/branch/master/graph/badge.svg)](https://codecov.io/github/vanzanden/ggsolvencyii?branch=master)
 
 ## Overview
 
@@ -57,26 +59,28 @@ devtools::install_github("vanzanden/ggsolvencyii")
 ## short version
 
 This README is a short version of the vignette ‘ggsolvencyii’ at
-<https://github.com/vanzanden/ggsolvencyii/tree/master/> which shows
-more code. the annotated code of the first example is shown in vignette
-‘showcase’.
+<https://cran.r-project.org/web/packages/ggsolvencyii/index.html> which
+shows the same examples with more code. The complete annotated code for
+the first figure is shown in vignette ‘showcase’. A further elaboration
+on the inner workings of the package and the use of parameter-values and
+tables can be found in vignette "coding overview’.
 
 ## example
 
 ggsolvencyii builds on ggplot-functionality and provides three geom’s:
 `geom_sii_risksurface`, `geom_sii_riskoutline` and
-`geom_sii_riskconnection`
+`geom_sii_riskconnection`.
 
-These three geom’s were used to produce the following plot which for
-example could be used for an ORSA (Own Risk and Solvency Assessment)
+These three geom’s were used to produce the following showcase plot
+which might be used for an ORSA (Own Risk and Solvency Assessment)
 report.
 
-![](man/images/README-showcase2-1.png)<!-- -->
+    #> scaling is based on inputvalue (maxscrvalue) of 25.7433642812936
+    #> scaling is based on a max (level= 1) value of 25.7433642812936
+    #> scaling is based on a max (level= 1) value of 25.7433642812936
+    #> scaling is based on a max (level= 1) value of 25.7433642812936
 
-    #> [1] "scaling is based on inputvalue (maxscrvalue) of 25.7433642812936"
-    #> [1] "scaling is based on a max (level= 1) value of 25.7433642812936"
-    #> [1] "scaling is based on a max (level= 1) value of 25.7433642812936"
-    #> [1] "scaling is based on a max (level= 1) value of 25.7433642812936"
+![](man/images/README-showcase2-1.png)<!-- -->
 
 The total surface (to the centerpoint of each circle) of the outer
 segments show the size of undiversified risks. Diversification is made
@@ -112,11 +116,10 @@ ggplot() +
 theme_bw() +
 scale_fill_manual(name = "Risks",values = sii_x_fillcolors_sf16_eng) +
 scale_color_manual(name = "Risks",values = sii_x_edgecolors_sf16_eng)
+#> scaling is based on a max (level= 1) value of 23
 ```
 
 <img src="man/images/README-example1-1.png" width="50%" />
-
-    #> [1] "scaling is based on a max (level= 1) value of 23"
 
 ### structure
 
@@ -135,8 +138,6 @@ another dataset `sii_z_ex2_data`, with only one SCR result.
 
 ![](man/images/README-examplelevelmax-1.png)<!-- -->
 
-    #> [1] "scaling is based on a max (level= 1) value of 30"
-
 ### Rotation and squared
 
 `rotationdescription` Rotates the plot in such a way that the indicated
@@ -148,21 +149,17 @@ clockwise.
 
 The option ‘squared’ makes a square plot, with the surface of all
 segments still in proportion.
-<img src="man/images/README-rotationsquare-1.png" width="50%" />
-
-    #> [1] "scaling is based on a max (level= 1) value of 30"
-    #> [1] "for id = 1 the description dependent rotation is : 325.945945945946 degrees"
-
-<!--
+<img src="man/images/README-rotationsquare-1.png" width="50%" /> <!--
 
 The second plot shows a comparison between a circle and square plot of the same data. Note that the radius of the SCR circle is smaller than the size of the SCR square and that angles are different because in the corners there is 'additional' surface available compared to a circle.
 
-<img src="man/images/README-circlesquare-1.png" width="50%" />
 
 ```
-#> [1] "scaling is based on a max (level= 1) value of 30"
-#> [1] "scaling is based on a max (level= 1) value of 30"
+#> scaling is based on a max (level= 1) value of 30
+#> scaling is based on a max (level= 1) value of 30
 ```
+
+<img src="man/images/README-circlesquare-1.png" width="50%" />
 
  ### scaling
 all SCR-buildups from a single call to `geom_sii_risksurface` or `geom_sii_riskoutline` plot are by default scaled in such a way that the largest SCR has a plotradius of one. When combining more calls, with several datasets a manual `maxscrvalue`-value can be given as a parameter. To prevent distortion, depending on the scale of x and y axis, `scalingx` and `scalingy` parameters are available.

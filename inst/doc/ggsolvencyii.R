@@ -7,7 +7,7 @@ library(ggsolvencyii)
 knitr::include_graphics('images/logo_engels_rvignettes.png')
 
 ## ----gh-installation, eval = FALSE---------------------------------------
-#  # install.packages("devtools")
+#  # install.packages("devtools", "dplyr" , "magrittr")
 #  devtools::install_github("vanzanden/ggsolvencyii")
 #  # or from the binary in github.com/vanzanden/ggsolvencyii/binaries/windows
 
@@ -42,7 +42,7 @@ ggplot2::ggplot() +
             ## all parameters are shown here, 
             ## the values behind the outcommented are the default values
               ## how and what
-                ## structuredf = sii_structure_sf16_eng,
+                ## structure = sii_structure_sf16_eng,
                 ## plotdetails = NULL,
               ## grouping
                 # levelmax = 99, 
@@ -147,7 +147,7 @@ rm(testdata) ; rm(horizontalscaling)
 ## ====================================================================== =====
 
 ## ---- debug, echo=FALSE, eval = FALSE------------------------------------
-#  t <- sii_debug(data_descr = sii_z_ex1_data$description,structure = sii_structure_sf16_eng,aggregatesuffix = "other", levelmax = sii_levelmax_sf16_995,plotdetails = sii_z_ex1_plotdetails, fillcolors = sii_z_ex1_fillcolors, edgecolors = sii_z_ex1_edgecolors)
+#  t <- sii_debug_geom(data_descr = sii_z_ex1_data$description,structure = sii_structure_sf16_eng,aggregatesuffix = "other", levelmax = sii_levelmax_sf16_995,plotdetails = sii_z_ex1_plotdetails, fillcolors = sii_z_ex1_fillcolors, edgecolors = sii_z_ex1_edgecolors)
 #  knitr::kable(t$debug_description[37:45,])
 #  knitr::kable(rbind(t$debug_level[1:13,],tail(t$debug_level,2)))
 

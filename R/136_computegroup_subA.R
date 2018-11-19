@@ -31,23 +31,24 @@
 
 
 ## fn_cornerpoints ====================================================== =====
-#' fn_cornerpoints
-#'
-#' @inheritParams fn_computegroup
-#' @param df The dataframe resulted from last step
-#' @param siiparams dummy text
-#'
-#' @return a dataframe with 5 added columns (ri, ro, db, de, plottype)
-#'
-#' @importFrom dplyr mutate
-#' @importFrom magrittr %>%
-#'
+# ' fn_cornerpoints
+# '
+# ' @inheritParams fn_computegroup
+# ' @param df The dataframe resulted from last step
+# ' @param siiparams dummy text
+# '
+# ' @return a dataframe with 5 added columns (ri, ro, db, de, plottype)
+# '
+# ' @importFrom dplyr mutate
+# ' @importFrom magrittr %>%
+# '
 # ' @exportnot
-#'
+# '
 # ' @examples
 
 fn_cornerpoints <- function(df, siiparams) {
     maxscrvalue         <- siiparams$maxscrvalue
+    tocenter            <- siiparams$tocenter
 
     t1 <- df  %>%
             dplyr::mutate(ri = NA, ro = NA, db = NA, de = NA, plottype = NA)
@@ -106,8 +107,12 @@ fn_cornerpoints <- function(df, siiparams) {
              de <- db + (t1$value[linecounter] / sumgroup) * (degroup - dbgroup)
             }
             dbtemp <- de
-            ri <- rigroup
-           ro <- sqrt((t1$value[linecounter] / maxscrvalue) / ((de - db) / 360))
+            if (tocenter == TRUE) {
+              ri <- 0
+            } else {
+              ri <- rigroup
+            }
+            ro <- sqrt((t1$value[linecounter] / maxscrvalue) / ((de - db) / 360))
             t1$ri[linecounter] <- ri
             rm(ri)
             t1$ro[linecounter] <- ro
@@ -128,17 +133,17 @@ fn_cornerpoints <- function(df, siiparams) {
 
 
 ## fn_rotation ========================================================== =====
-#' fn_rotation
-#'
-#' @inheritParams fn_computegroup
-#' @param df The dataframe resulted from last step
+# ' fn_rotation
+# '
+# ' @inheritParams fn_computegroup
+# ' @param df The dataframe resulted from last step
 # ' @param siiparams   dummy text
 
 
-#' @return a dataframe with adjusted db and de columns
-#'
+# ' @return a dataframe with adjusted db and de columns
+# '
 # ' @exportnot
-#'
+# '
 # ' @examples
 
 fn_rotation <- function(df, siiparams) {
@@ -151,11 +156,11 @@ fn_rotation <- function(df, siiparams) {
           rotation_a <- 0
         } else {
           rotation_a <- 360 - df$db[df$description == rotationdescription]
-          print(paste0("for id = ",
-                         df$id[1],
-                         " the description dependent rotation is : ",
-                         rotation_a,
-                         " degrees"))
+          message("for id = ",
+                  df$id[1],
+                 " the description dependent rotation is : ",
+                  rotation_a,
+                 " degrees")
         }
         if (is.null(rotationdegrees)) {
           rotation_b <- 0
@@ -172,41 +177,43 @@ fn_rotation <- function(df, siiparams) {
 
 ## fn_squareconversion ================================================== =====
 
-#' fn_squareconversion
-#'
-#' @param df a dataframe with columns ri, ro, db, de
-#'
-#' @return the same dataframe with ri, ro, db and de converted in parameters for a square plot
+# ' fn_squareconversion
+# '
+# ' @param df a dataframe with columns ri, ro, db, de
+# ' @param siiparams the (extended) parameterset
+# '
+# ' @return the same dataframe with ri, ro, db and de converted in parameters for a square plot
 # ' @export
-#'
+# '
 # ' @examples
 
-fn_squareconversion <- function(df) {
-        df$ri <- df$ri * (.5 * sqrt(pi))  ## factor .88
-        df$ro <- df$ro * (.5 * sqrt(pi))  ## factor .88
-        ## CALL
-        df$db <- apply(as.data.frame(df$db),
-                       MARGIN = 1,
-                       FUN = fn_squareddegrees)
-# print(as.data.frame(df$de))
-        ## CALL
-        df$de <- apply(as.data.frame(df$de),
-                       MARGIN = 1,
-                       FUN = fn_squareddegrees)
-# print(as.data.frame(df$de))
+fn_squareconversion <- function(df , siiparams) {
+        squared <- siiparams$squared
+        if (squared == TRUE ) {
+          df$ri <- df$ri * (.5 * sqrt(pi))  ## factor .88
+          df$ro <- df$ro * (.5 * sqrt(pi))  ## factor .88
+          ## CALL
+          df$db <- apply(as.data.frame(df$db),
+                         MARGIN = 1,
+                         FUN = fn_squareddegrees)
+          ## CALL
+          df$de <- apply(as.data.frame(df$de),
+                         MARGIN = 1,
+                         FUN = fn_squareddegrees)
+        }
       ## return results
         return(df)
     }
 
 
 ## fn_squareddegrees ==================================================== =====
-#' fn_squareddegrees The actual transformation of a part of a circle to the (surfacewise)  equivalent of the part of a square
-#'
-#' @param circledegrees (no default) an amount in degrees
-#'
-#' @return an amount in compass degrees
+# ' fn_squareddegrees The actual transformation of a part of a circle to the (surfacewise)  equivalent of the part of a square
+# '
+# ' @param circledegrees (no default) an amount in degrees
+# '
+# ' @return an amount in compass degrees
 # ' @export
-#'
+# '
 # ' @examples
 
 fn_squareddegrees <- function (circledegrees) {
@@ -221,20 +228,20 @@ fn_squareddegrees <- function (circledegrees) {
     }
 
 ## fn_polygonpoints ===================================================== =====
-#' fn_polygonpoints
-#'
-#' @inheritParams fn_computegroup
-#' @param df  The dataframe resulted from last step
+# ' fn_polygonpoints
+# '
+# ' @inheritParams fn_computegroup
+# ' @param df  The dataframe resulted from last step
 # ' @param siiparams   dummy text
-#' @param counter_polyorder a continues counter, needed for sorting polygonpoints
-#'
-#' @return a list with two items (df (dataframe), counter_polyorder (numeric, updated)
-#'
-#' @importFrom dplyr mutate
-#' @importFrom magrittr %>%
-#'
+# ' @param counter_polyorder a continues counter, needed for sorting polygonpoints
+# '
+# ' @return a list with two items (df (dataframe), counter_polyorder (numeric, updated)
+# '
+# ' @importFrom dplyr mutate
+# ' @importFrom magrittr %>%
+# '
 # ' @exportnot
-#'
+# '
 # ' @examples
 
 
@@ -291,5 +298,4 @@ fn_polygonpoints <- function (df, siiparams, counter_polyorder) {
   ## result
     return(result)
 }
-
 ## ====================================================================== =====

@@ -6,7 +6,7 @@
 \usage{
 geom_sii_riskoutline(data = NULL, mapping = NULL,
   stat = "sii_riskoutline",
-  structuredf = ggsolvencyii::sii_structure_sf16_eng, squared = FALSE,
+  structure = ggsolvencyii::sii_structure_sf16_eng, squared = FALSE,
   levelmax = 99, aggregatesuffix = "_other", plotdetails = NULL,
   rotationdegrees = NULL, rotationdescription = NULL,
   maxscrvalue = NULL, scalingx = 1, scalingy = 1,
@@ -20,7 +20,7 @@ geom_sii_riskoutline(data = NULL, mapping = NULL,
 
 \item{stat}{default stat is statsii_riskoutline, combinations with other stat's are not tested}
 
-\item{structuredf}{(dataframe: default = \code{\link{sii_structure_sf16_eng}})\cr A representation of the buildup from individual risks to the SCR. columns are \enumerate{\item description (chr),\item  level (chr),\item  childlevel (chr)}. In the standard formula structure, SCR has level 1, with childlevel 2. This means it consists of all datalines with level == 2, ie. "BSCR", "operational" and "Adjustment-LACDT". lines in the dataset with a suffix "d" behind the levelnumber are diversification items. As of now these are not used in any calculation. the values in column "description" in the dataset need to match the description in this file. The package contains also a file \code{\link{sii_structure_sf16_nld}} with Dutch terms in description column.}
+\item{structure}{(dataframe: default = \code{\link{sii_structure_sf16_eng}})\cr A representation of the buildup from individual risks to the SCR. columns are \enumerate{\item description (chr),\item  level (chr),\item  childlevel (chr)}. In the standard formula structure, SCR has level 1, with childlevel 2. This means it consists of all datalines with level == 2, ie. "BSCR", "operational" and "Adjustment-LACDT". lines in the dataset with a suffix "d" behind the levelnumber are diversification items. As of now these are not used in any calculation. the values in column "description" in the dataset need to match the description in this file. The package contains also a file \code{\link{sii_structure_sf16_nld}} with Dutch terms in description column.}
 
 \item{squared}{(optional, boolean, default = FALSE)\cr when set to TRUE plot returns a square representation. Compared with a circle representation of the same data the height and width of the square are smaller than the radius of the circle. Segments which fall in the corner parts of the square are smaller than equally sized part which fall in the vertical or horizontal parts of the square.}
 
@@ -59,7 +59,7 @@ a 'ggplot2' object \code{\link{geom_sii_risksurface}}
 returns a 'ggplot2' object, based on geom_path with the outlines concentric circle(part)s, defined by the values in a hierarchy of levels. This can be used instead of geom_sii_risksurface to plot the composition of the SCR. When optional aes(thetic) 'comparewithid' is passed to the geom_sii_riskoutline then the second SCR can be an overlay over another, for easy comparison.
 }
 \details{
-When describing an outline of a circlepart 4 segments can be distinguised, radial line outwards, outer circle segment, radial line inwards, inner circle segment. Whether or not to plot these lines can be determined with an outline dataframe.
+When describing an outline of a circle part 4 segments can be distinguised, radial line outwards, outer circle segment, radial line inwards, inner circle segment. Whether or not to plot these lines can be determined with an outline dataframe.
 by means of the column aes()value comparewithid in the data an overlay can be made to compare two SCR representations.
 }
 \examples{

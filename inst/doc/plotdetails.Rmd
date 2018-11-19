@@ -1,7 +1,8 @@
 ---
-title: "plotdetails"
+title: "Plotdetails"
 author: "Marco van Zanden"
 date: "`r Sys.Date()`"
+md_document: markdown_strict
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{plotdetails}
@@ -17,20 +18,17 @@ library(ggsolvencyii)
 knitr::include_graphics('images/logo_engels_rvignettes.png')
 ```
 
-## Disclaimer
+## interested ? ..... anyone ????
 
-This documentation is in a rudimentary form for release 0.1.0. which is meant to see how much interest (not the financial one) this package generates.
+This documentation is in a rudimentary form for release 0.1.1. which is meant to see how much interest (not the financial one) this package generates.
 
 ## Vignettes
 The following vignettes are available.  
  
 * ggsolvencyii 
-* geom_sii_risksurface
-* geom_sii_riskoutline
-* geom_sii_riskconnection
 * plotdetails (this vignette)
 * showcase
-* coding_overview
+* coding_overview (placeholder)
 
 On https://github.com/vanzanden/ggsolvencyii/tree/master/vignettes less rudimentary versions might be available between releases.
 
