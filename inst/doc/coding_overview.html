@@ -12,14 +12,14 @@
 
 <meta name="author" content="Marco van Zanden" />
 
-<meta name="date" content="2018-11-19" />
+<meta name="date" content="2019-01-03" />
 
 <title>Coding overview</title>
 
 
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
+<style type="text/css" data-origin="pandoc">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
 a.sourceLine:empty { height: 1.2em; }
@@ -37,7 +37,7 @@ a.sourceLine { text-indent: -1em; padding-left: 1em; }
 pre.numberSource a.sourceLine
   { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+  { content: attr(title);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
     border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
@@ -81,7 +81,29 @@ code span.st { color: #4070a0; } /* String */
 code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
 </style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 
 
 
@@ -278,7 +300,7 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 
 <h1 class="title toc-ignore">Coding overview</h1>
 <h4 class="author"><em>Marco van Zanden</em></h4>
-<h4 class="date"><em>2018-11-19</em></h4>
+<h4 class="date"><em>2019-01-03</em></h4>
 
 
 
@@ -386,30 +408,30 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <h3>data in ‘ggplot2’ prescribe format (tidyverse format)</h3>
 <p><code>ggplot2</code>, the foundation on which the plotting part of this package is build expects data in a tidyverse format. Each row in the data describes only one data point i.e. value of SCR item for one specific ‘id’.</p>
 <p>the following code is used from transferring data (for example 2, a single SCR plot) in a spreadsheet the same form as the “human format” as above to tidyverse format (the numbers differ though !)</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">data &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_xlsx</span>(<span class="dt">path =</span> <span class="st">&quot;path/filename.xlsx&quot;</span>,<span class="dt">sheet =</span> <span class="st">&quot;ex2_data&quot;</span>)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">  data &lt;-<span class="st"> </span>tidyr<span class="op">::</span><span class="kw">gather</span>(data,</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3">                        <span class="dt">key =</span> description,</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">                        <span class="dt">value =</span> value,</a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">                        <span class="op">-</span>id, <span class="op">-</span>time, <span class="op">-</span>ratio)</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">  sii_z_ex2_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(   <span class="dt">time =</span> <span class="kw">as.numeric</span>(data<span class="op">$</span>time),</a>
-<a class="sourceLine" id="cb1-7" data-line-number="7">                                      <span class="dt">ratio =</span> <span class="kw">as.numeric</span>(data<span class="op">$</span>ratio),</a>
-<a class="sourceLine" id="cb1-8" data-line-number="8">                                      <span class="dt">description =</span> data<span class="op">$</span>description,   <span class="co"># it has to be a factor !!</span></a>
-<a class="sourceLine" id="cb1-9" data-line-number="9">                                      <span class="dt">value =</span> <span class="kw">as.numeric</span>(data<span class="op">$</span>value),</a>
-<a class="sourceLine" id="cb1-10" data-line-number="10">                                      <span class="dt">id =</span> data<span class="op">$</span>id </a></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"> <span class="kw">head</span>(sii_z_ex2_data,<span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co">#&gt;   time ratio      description value id</span></a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="co">#&gt; 1 2017   230              SCR    30  1</span></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4"><span class="co">#&gt; 2 2017   230             BSCR    35  1</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5"><span class="co">#&gt; 3 2017   230      operational     5  1</span></a>
-<a class="sourceLine" id="cb2-6" data-line-number="6"><span class="co">#&gt; 4 2017   230 Adjustment-LACDT   -10  1</span></a>
-<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co">#&gt; 5 2017   230         BSCR_div    -5  1</span></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co">#&gt; 6 2017   230           market    20  1</span></a>
-<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co">#&gt; 7 2017   230             life    15  1</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">data &lt;-<span class="st"> </span>readxl<span class="op">::</span><span class="kw">read_xlsx</span>(<span class="dt">path =</span> <span class="st">&quot;path/filename.xlsx&quot;</span>,<span class="dt">sheet =</span> <span class="st">&quot;ex2_data&quot;</span>)</a>
+<a class="sourceLine" id="cb1-2" title="2">  data &lt;-<span class="st"> </span>tidyr<span class="op">::</span><span class="kw">gather</span>(data,</a>
+<a class="sourceLine" id="cb1-3" title="3">                        <span class="dt">key =</span> description,</a>
+<a class="sourceLine" id="cb1-4" title="4">                        <span class="dt">value =</span> value,</a>
+<a class="sourceLine" id="cb1-5" title="5">                        <span class="op">-</span>id, <span class="op">-</span>time, <span class="op">-</span>ratio)</a>
+<a class="sourceLine" id="cb1-6" title="6">  sii_z_ex2_data &lt;-<span class="st"> </span><span class="kw">data.frame</span>(   <span class="dt">time =</span> <span class="kw">as.numeric</span>(data<span class="op">$</span>time),</a>
+<a class="sourceLine" id="cb1-7" title="7">                                      <span class="dt">ratio =</span> <span class="kw">as.numeric</span>(data<span class="op">$</span>ratio),</a>
+<a class="sourceLine" id="cb1-8" title="8">                                      <span class="dt">description =</span> data<span class="op">$</span>description,   <span class="co"># it has to be a factor !!</span></a>
+<a class="sourceLine" id="cb1-9" title="9">                                      <span class="dt">value =</span> <span class="kw">as.numeric</span>(data<span class="op">$</span>value),</a>
+<a class="sourceLine" id="cb1-10" title="10">                                      <span class="dt">id =</span> data<span class="op">$</span>id </a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"> <span class="kw">head</span>(sii_z_ex2_data,<span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="co">#&gt;   time ratio      description value id</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="co">#&gt; 1 2017   230              SCR    30  1</span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="co">#&gt; 2 2017   230             BSCR    35  1</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="co">#&gt; 3 2017   230      operational     5  1</span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="co">#&gt; 4 2017   230 Adjustment-LACDT   -10  1</span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="co">#&gt; 5 2017   230         BSCR_div    -5  1</span></a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="co">#&gt; 6 2017   230           market    20  1</span></a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="co">#&gt; 7 2017   230             life    15  1</span></a></code></pre></div>
 </div>
 <div id="ggsolvencyii-data-transformations" class="section level3">
 <h3>ggsolvencyii: data transformations</h3>
 <p>when the above data is passed to the package with (a very) basic line as</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_sii_risksurface</span>(<span class="dt">data =</span> sii_z_ex2_data , <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x=</span>time, <span class="dt">y =</span> ratio, <span class="dt">id=</span>id, <span class="dt">value =</span> value, <span class="dt">description =</span> description))</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span><span class="kw">geom_sii_risksurface</span>(<span class="dt">data =</span> sii_z_ex2_data , <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x=</span>time, <span class="dt">y =</span> ratio, <span class="dt">id=</span>id, <span class="dt">value =</span> value, <span class="dt">description =</span> description))</a></code></pre></div>
 <p>a lot happens under the hood. Broadly speaking the next steps are taken for <code>geom_sii_surface</code> and <code>.._outline</code>:</p>
 <pre><code> 1. when `geom_sii_riskoutline` is used for comparison of id&#39;s, risk-values are moved between data rows
  2. the structure of the SCR composition a expanded with grouping information
@@ -421,19 +443,19 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <div id="shuffling-with-riskvalues-in-the-data" class="section level4">
 <h4>shuffling with riskvalues in the data</h4>
 <p><code>geom_sii_riskoutline</code> plots (some of) the outlines of circle segment and as such can be used for a non-obtrusive plot, or for an overlay of the composition of one SCR over the other (see use in vignette <code>showcase</code>. To prevent the need of working with two separate datasets the optional aesthetic <code>comparewithid</code> is present in <code>geom_sii_outline</code>. It is best explained with an example. Compare the data of <code>sii_z_ex1_data</code> with the expanded structures without and with use of the <code>comparewithid</code>-aesthetic. It shows that the structure of id = 1 is not plotted anymore at its own location (2016,230) but three times in 201: Value 23 for SCR is now present three times in the data. This transformation is used for all (sub)risks.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co">## the original data</span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">      sii_z_ex1_data[sii_z_ex1_data<span class="op">$</span>description <span class="op">==</span><span class="st"> &quot;SCR&quot;</span>, ]</a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#&gt;    time ratio description    value id comparewithid</span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co">#&gt; 1  2016   230         SCR 23.00000  1            NA</span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="co">#&gt; 2  2017   233         SCR 23.14993  2             1</span></a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#&gt; 3  2018   238         SCR 19.99461  3             2</span></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="co">#&gt; 4  2019   243         SCR 15.61773  4             3</span></a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="co">#&gt; 5  2017   231         SCR 19.60600  5             1</span></a>
-<a class="sourceLine" id="cb5-9" data-line-number="9"><span class="co">#&gt; 6  2018   232         SCR 25.74336  6             5</span></a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#&gt; 7  2019   232         SCR 21.91342  7             6</span></a>
-<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="co">#&gt; 8  2017   227         SCR 25.08169  8             1</span></a>
-<a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt; 9  2018   225         SCR 22.43068  9             8</span></a>
-<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt; 10 2019   226         SCR 21.91607 10             9</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co">## the original data</span></a>
+<a class="sourceLine" id="cb5-2" title="2">      sii_z_ex1_data[sii_z_ex1_data<span class="op">$</span>description <span class="op">==</span><span class="st"> &quot;SCR&quot;</span>, ]</a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="co">#&gt;    time ratio description    value id comparewithid</span></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="co">#&gt; 1  2016   230         SCR 23.00000  1            NA</span></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="co">#&gt; 2  2017   233         SCR 23.14993  2             1</span></a>
+<a class="sourceLine" id="cb5-6" title="6"><span class="co">#&gt; 3  2018   238         SCR 19.99461  3             2</span></a>
+<a class="sourceLine" id="cb5-7" title="7"><span class="co">#&gt; 4  2019   243         SCR 15.61773  4             3</span></a>
+<a class="sourceLine" id="cb5-8" title="8"><span class="co">#&gt; 5  2017   231         SCR 19.60600  5             1</span></a>
+<a class="sourceLine" id="cb5-9" title="9"><span class="co">#&gt; 6  2018   232         SCR 25.74336  6             5</span></a>
+<a class="sourceLine" id="cb5-10" title="10"><span class="co">#&gt; 7  2019   232         SCR 21.91342  7             6</span></a>
+<a class="sourceLine" id="cb5-11" title="11"><span class="co">#&gt; 8  2017   227         SCR 25.08169  8             1</span></a>
+<a class="sourceLine" id="cb5-12" title="12"><span class="co">#&gt; 9  2018   225         SCR 22.43068  9             8</span></a>
+<a class="sourceLine" id="cb5-13" title="13"><span class="co">#&gt; 10 2019   226         SCR 21.91607 10             9</span></a></code></pre></div>
 <pre><code>#&gt; without passing the aesthetic &#39;comparewithid`: 10 lines of data
 #&gt;    description id    x   y    value
 #&gt; 35         SCR  1 2016 230 23.00000
@@ -461,25 +483,25 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <div id="structure-levels-levels-levels" class="section level4">
 <h4>structure: levels, levels, levels…</h4>
 <p>The foundation of the package is the structure. A representation of the buildup of the SCR from its risks and subrisks. This structure is applied as a data.frame passed as a parameter to the geom’s <code>geom_sii_surface</code> and <code>geom_sii_outline</code>. The default data.frame is <code>sii_structure_sf16_eng</code> where ‘sf16’ stands for the standard formula as of 2016, and ‘eng’ for English descriptions.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"> <span class="kw">head</span>(sii_structure_sf16_eng, <span class="dv">15</span>)</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="co">#&gt; # A tibble: 15 x 3</span></a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="co">#&gt;    description      level childlevel</span></a>
-<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co">#&gt;    &lt;chr&gt;            &lt;chr&gt; &lt;chr&gt;     </span></a>
-<a class="sourceLine" id="cb7-5" data-line-number="5"><span class="co">#&gt;  1 SCR              1     2         </span></a>
-<a class="sourceLine" id="cb7-6" data-line-number="6"><span class="co">#&gt;  2 BSCR             2     3         </span></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co">#&gt;  3 operational      2     &lt;NA&gt;      </span></a>
-<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="co">#&gt;  4 Adjustment-LACDT 2d    &lt;NA&gt;      </span></a>
-<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="co">#&gt;  5 BSCR_div         3d    &lt;NA&gt;      </span></a>
-<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co">#&gt;  6 market           3     4.01      </span></a>
-<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="co">#&gt;  7 life             3     4.02      </span></a>
-<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co">#&gt;  8 non-life         3     4.03      </span></a>
-<a class="sourceLine" id="cb7-13" data-line-number="13"><span class="co">#&gt;  9 health           3     4.04      </span></a>
-<a class="sourceLine" id="cb7-14" data-line-number="14"><span class="co">#&gt; 10 cp-default       3     &lt;NA&gt;      </span></a>
-<a class="sourceLine" id="cb7-15" data-line-number="15"><span class="co">#&gt; 11 intangibles      3     &lt;NA&gt;      </span></a>
-<a class="sourceLine" id="cb7-16" data-line-number="16"><span class="co">#&gt; 12 market_div       4.01d &lt;NA&gt;      </span></a>
-<a class="sourceLine" id="cb7-17" data-line-number="17"><span class="co">#&gt; 13 m_interestrate   4.01  &lt;NA&gt;      </span></a>
-<a class="sourceLine" id="cb7-18" data-line-number="18"><span class="co">#&gt; 14 m_equity         4.01  &lt;NA&gt;      </span></a>
-<a class="sourceLine" id="cb7-19" data-line-number="19"><span class="co">#&gt; 15 m_property       4.01  &lt;NA&gt;</span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"> <span class="kw">head</span>(sii_structure_sf16_eng, <span class="dv">15</span>)</a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="co">#&gt; # A tibble: 15 x 3</span></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="co">#&gt;    description      level childlevel</span></a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="co">#&gt;    &lt;chr&gt;            &lt;chr&gt; &lt;chr&gt;     </span></a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="co">#&gt;  1 SCR              1     2         </span></a>
+<a class="sourceLine" id="cb7-6" title="6"><span class="co">#&gt;  2 BSCR             2     3         </span></a>
+<a class="sourceLine" id="cb7-7" title="7"><span class="co">#&gt;  3 operational      2     &lt;NA&gt;      </span></a>
+<a class="sourceLine" id="cb7-8" title="8"><span class="co">#&gt;  4 Adjustment-LACDT 2d    &lt;NA&gt;      </span></a>
+<a class="sourceLine" id="cb7-9" title="9"><span class="co">#&gt;  5 BSCR_div         3d    &lt;NA&gt;      </span></a>
+<a class="sourceLine" id="cb7-10" title="10"><span class="co">#&gt;  6 market           3     4.01      </span></a>
+<a class="sourceLine" id="cb7-11" title="11"><span class="co">#&gt;  7 life             3     4.02      </span></a>
+<a class="sourceLine" id="cb7-12" title="12"><span class="co">#&gt;  8 non-life         3     4.03      </span></a>
+<a class="sourceLine" id="cb7-13" title="13"><span class="co">#&gt;  9 health           3     4.04      </span></a>
+<a class="sourceLine" id="cb7-14" title="14"><span class="co">#&gt; 10 cp-default       3     &lt;NA&gt;      </span></a>
+<a class="sourceLine" id="cb7-15" title="15"><span class="co">#&gt; 11 intangibles      3     &lt;NA&gt;      </span></a>
+<a class="sourceLine" id="cb7-16" title="16"><span class="co">#&gt; 12 market_div       4.01d &lt;NA&gt;      </span></a>
+<a class="sourceLine" id="cb7-17" title="17"><span class="co">#&gt; 13 m_interestrate   4.01  &lt;NA&gt;      </span></a>
+<a class="sourceLine" id="cb7-18" title="18"><span class="co">#&gt; 14 m_equity         4.01  &lt;NA&gt;      </span></a>
+<a class="sourceLine" id="cb7-19" title="19"><span class="co">#&gt; 15 m_property       4.01  &lt;NA&gt;</span></a></code></pre></div>
 <p>A Dutch version, <code>sii_structure_sf16_nld</code>, is present in the package.</p>
 <p>The hierarchy of the elements in <code>description</code> is determined by <code>level</code> and their components (<code>childlevel</code>). SCR has a mandatory level (character value) “1”. rows with a suffix ‘d’ indicate a diversification item.</p>
 <p>For other localizations or for use with internal models another structure can be passed to the geom. see my interpretation of the Internal Model of the dutch insurer “nationale nederlanden” in <code>sii_z_ex6_structure</code>. Changing level-numbering or descriptions of items leads possible to the need of changing other (parameter) files as well (i.e. levelmax, plotdetails, coloring-sets).</p>
@@ -488,18 +510,18 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <h4>expanding the structure: possible grouping</h4>
 <p>When reporting the SCR composition of a large insurance company many risks will be present. This can lead to a very cluttered plot where all information is present but which is difficult to interpret. The package provides the means to restrict the amount of items to ‘k’ (in general or for each level separately) by means of the parameter <code>levelmax</code>. this can be an integer, to applied to all items or in the form of a data.frame. The default value is 99, only grouping for risks with more than 100 sub-risks….</p>
 <p>Parameter <code>levelmax = sii_levelmax_sf16_995</code> shows all higher levels (lower level numbers) but restricts the lower levels (higher numbers) to 4 individual risks and 1 grouping of the smallest risks in that level.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1">sii_levelmax_sf16_<span class="dv">995</span></a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co">#&gt; # A tibble: 8 x 2</span></a>
-<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">#&gt;   level levelmax</span></a>
-<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co">#&gt;   &lt;chr&gt;    &lt;dbl&gt;</span></a>
-<a class="sourceLine" id="cb8-5" data-line-number="5"><span class="co">#&gt; 1 1           99</span></a>
-<a class="sourceLine" id="cb8-6" data-line-number="6"><span class="co">#&gt; 2 2           99</span></a>
-<a class="sourceLine" id="cb8-7" data-line-number="7"><span class="co">#&gt; 3 3           99</span></a>
-<a class="sourceLine" id="cb8-8" data-line-number="8"><span class="co">#&gt; 4 4.01         5</span></a>
-<a class="sourceLine" id="cb8-9" data-line-number="9"><span class="co">#&gt; 5 4.02         5</span></a>
-<a class="sourceLine" id="cb8-10" data-line-number="10"><span class="co">#&gt; 6 4.03         5</span></a>
-<a class="sourceLine" id="cb8-11" data-line-number="11"><span class="co">#&gt; 7 4.04         5</span></a>
-<a class="sourceLine" id="cb8-12" data-line-number="12"><span class="co">#&gt; 8 5            5</span></a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">sii_levelmax_sf16_<span class="dv">995</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="co">#&gt; # A tibble: 8 x 2</span></a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="co">#&gt;   level levelmax</span></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="co">#&gt;   &lt;chr&gt;    &lt;dbl&gt;</span></a>
+<a class="sourceLine" id="cb8-5" title="5"><span class="co">#&gt; 1 1           99</span></a>
+<a class="sourceLine" id="cb8-6" title="6"><span class="co">#&gt; 2 2           99</span></a>
+<a class="sourceLine" id="cb8-7" title="7"><span class="co">#&gt; 3 3           99</span></a>
+<a class="sourceLine" id="cb8-8" title="8"><span class="co">#&gt; 4 4.01         5</span></a>
+<a class="sourceLine" id="cb8-9" title="9"><span class="co">#&gt; 5 4.02         5</span></a>
+<a class="sourceLine" id="cb8-10" title="10"><span class="co">#&gt; 6 4.03         5</span></a>
+<a class="sourceLine" id="cb8-11" title="11"><span class="co">#&gt; 7 4.04         5</span></a>
+<a class="sourceLine" id="cb8-12" title="12"><span class="co">#&gt; 8 5            5</span></a></code></pre></div>
 <p>Combining the structure and the levelmax-information leads to an expanded structure of which the lines for levels 3 and 4.01 are shown here:</p>
 <pre><code>#&gt; # A tibble: 15 x 4
 #&gt;    description     level childlevel levelmax
@@ -534,35 +556,35 @@ code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61
 <p>The (transformed/rotated) corner points are translated in polygon points (for <code>geom_sii_risksurface</code>) or line segments (for <code>geom_sii_riskoutline</code>)</p>
 <p>The final step is to define which of all these polygons or line segments actually will be plotted. By default everything will be plotted but passing a dataframe to parameter <code>plotdetails</code> can determine this on a <code>level</code>-level or a <code>description</code>-level.</p>
 <p>In the showcase two data-frames are used, only differing in column <code>surface</code>, but equal for outline1 to outline13. one of them is shown here.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">sii_z_ex1_plotdetails</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co">#&gt;    levelordescription surface outline1 outline2 outline3 outline4</span></a>
-<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="co">#&gt; 1                   1    TRUE       NA     TRUE       NA       NA</span></a>
-<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="co">#&gt; 2                   2    TRUE     TRUE       NA     TRUE       NA</span></a>
-<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="co">#&gt; 3                  2d    TRUE       NA       NA       NA       NA</span></a>
-<a class="sourceLine" id="cb10-6" data-line-number="6"><span class="co">#&gt; 4                   3    TRUE     TRUE     TRUE     TRUE       NA</span></a>
-<a class="sourceLine" id="cb10-7" data-line-number="7"><span class="co">#&gt; 5                  3d    TRUE       NA       NA       NA       NA</span></a>
-<a class="sourceLine" id="cb10-8" data-line-number="8"><span class="co">#&gt; 6                4.01   FALSE       NA     TRUE       NA       NA</span></a>
-<a class="sourceLine" id="cb10-9" data-line-number="9"><span class="co">#&gt; 7               4.01d   FALSE       NA       NA       NA       NA</span></a>
-<a class="sourceLine" id="cb10-10" data-line-number="10"><span class="co">#&gt; 8               4.01o   FALSE       NA     TRUE       NA       NA</span></a>
-<a class="sourceLine" id="cb10-11" data-line-number="11"><span class="co">#&gt; 9                4.02   FALSE       NA     TRUE       NA       NA</span></a>
-<a class="sourceLine" id="cb10-12" data-line-number="12"><span class="co">#&gt; 10              4.02d   FALSE       NA       NA       NA       NA</span></a>
-<a class="sourceLine" id="cb10-13" data-line-number="13"><span class="co">#&gt; 11              4.02o   FALSE       NA     TRUE       NA       NA</span></a>
-<a class="sourceLine" id="cb10-14" data-line-number="14"><span class="co">#&gt; 12        operational      NA     TRUE     TRUE     TRUE       NA</span></a>
-<a class="sourceLine" id="cb10-15" data-line-number="15"><span class="co">#&gt; 13         cp-default      NA     TRUE     TRUE     TRUE       NA</span></a>
-<a class="sourceLine" id="cb10-16" data-line-number="16"><span class="co">#&gt;    outline11 outline13</span></a>
-<a class="sourceLine" id="cb10-17" data-line-number="17"><span class="co">#&gt; 1       TRUE      TRUE</span></a>
-<a class="sourceLine" id="cb10-18" data-line-number="18"><span class="co">#&gt; 2         NA        NA</span></a>
-<a class="sourceLine" id="cb10-19" data-line-number="19"><span class="co">#&gt; 3         NA        NA</span></a>
-<a class="sourceLine" id="cb10-20" data-line-number="20"><span class="co">#&gt; 4         NA        NA</span></a>
-<a class="sourceLine" id="cb10-21" data-line-number="21"><span class="co">#&gt; 5         NA        NA</span></a>
-<a class="sourceLine" id="cb10-22" data-line-number="22"><span class="co">#&gt; 6       TRUE      TRUE</span></a>
-<a class="sourceLine" id="cb10-23" data-line-number="23"><span class="co">#&gt; 7         NA        NA</span></a>
-<a class="sourceLine" id="cb10-24" data-line-number="24"><span class="co">#&gt; 8       TRUE      TRUE</span></a>
-<a class="sourceLine" id="cb10-25" data-line-number="25"><span class="co">#&gt; 9       TRUE      TRUE</span></a>
-<a class="sourceLine" id="cb10-26" data-line-number="26"><span class="co">#&gt; 10        NA        NA</span></a>
-<a class="sourceLine" id="cb10-27" data-line-number="27"><span class="co">#&gt; 11      TRUE      TRUE</span></a>
-<a class="sourceLine" id="cb10-28" data-line-number="28"><span class="co">#&gt; 12        NA        NA</span></a>
-<a class="sourceLine" id="cb10-29" data-line-number="29"><span class="co">#&gt; 13        NA        NA</span></a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">sii_z_ex1_plotdetails</a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="co">#&gt;    levelordescription surface outline1 outline2 outline3 outline4</span></a>
+<a class="sourceLine" id="cb10-3" title="3"><span class="co">#&gt; 1                   1    TRUE       NA     TRUE       NA       NA</span></a>
+<a class="sourceLine" id="cb10-4" title="4"><span class="co">#&gt; 2                   2    TRUE     TRUE       NA     TRUE       NA</span></a>
+<a class="sourceLine" id="cb10-5" title="5"><span class="co">#&gt; 3                  2d    TRUE       NA       NA       NA       NA</span></a>
+<a class="sourceLine" id="cb10-6" title="6"><span class="co">#&gt; 4                   3    TRUE     TRUE     TRUE     TRUE       NA</span></a>
+<a class="sourceLine" id="cb10-7" title="7"><span class="co">#&gt; 5                  3d    TRUE       NA       NA       NA       NA</span></a>
+<a class="sourceLine" id="cb10-8" title="8"><span class="co">#&gt; 6                4.01   FALSE       NA     TRUE       NA       NA</span></a>
+<a class="sourceLine" id="cb10-9" title="9"><span class="co">#&gt; 7               4.01d   FALSE       NA       NA       NA       NA</span></a>
+<a class="sourceLine" id="cb10-10" title="10"><span class="co">#&gt; 8               4.01o   FALSE       NA     TRUE       NA       NA</span></a>
+<a class="sourceLine" id="cb10-11" title="11"><span class="co">#&gt; 9                4.02   FALSE       NA     TRUE       NA       NA</span></a>
+<a class="sourceLine" id="cb10-12" title="12"><span class="co">#&gt; 10              4.02d   FALSE       NA       NA       NA       NA</span></a>
+<a class="sourceLine" id="cb10-13" title="13"><span class="co">#&gt; 11              4.02o   FALSE       NA     TRUE       NA       NA</span></a>
+<a class="sourceLine" id="cb10-14" title="14"><span class="co">#&gt; 12        operational      NA     TRUE     TRUE     TRUE       NA</span></a>
+<a class="sourceLine" id="cb10-15" title="15"><span class="co">#&gt; 13         cp-default      NA     TRUE     TRUE     TRUE       NA</span></a>
+<a class="sourceLine" id="cb10-16" title="16"><span class="co">#&gt;    outline11 outline13</span></a>
+<a class="sourceLine" id="cb10-17" title="17"><span class="co">#&gt; 1       TRUE      TRUE</span></a>
+<a class="sourceLine" id="cb10-18" title="18"><span class="co">#&gt; 2         NA        NA</span></a>
+<a class="sourceLine" id="cb10-19" title="19"><span class="co">#&gt; 3         NA        NA</span></a>
+<a class="sourceLine" id="cb10-20" title="20"><span class="co">#&gt; 4         NA        NA</span></a>
+<a class="sourceLine" id="cb10-21" title="21"><span class="co">#&gt; 5         NA        NA</span></a>
+<a class="sourceLine" id="cb10-22" title="22"><span class="co">#&gt; 6       TRUE      TRUE</span></a>
+<a class="sourceLine" id="cb10-23" title="23"><span class="co">#&gt; 7         NA        NA</span></a>
+<a class="sourceLine" id="cb10-24" title="24"><span class="co">#&gt; 8       TRUE      TRUE</span></a>
+<a class="sourceLine" id="cb10-25" title="25"><span class="co">#&gt; 9       TRUE      TRUE</span></a>
+<a class="sourceLine" id="cb10-26" title="26"><span class="co">#&gt; 10        NA        NA</span></a>
+<a class="sourceLine" id="cb10-27" title="27"><span class="co">#&gt; 11      TRUE      TRUE</span></a>
+<a class="sourceLine" id="cb10-28" title="28"><span class="co">#&gt; 12        NA        NA</span></a>
+<a class="sourceLine" id="cb10-29" title="29"><span class="co">#&gt; 13        NA        NA</span></a></code></pre></div>
 <p><code>surface</code> is used by <code>geom_sii_risksurface</code>, the other columns by <code>geom_sii_riskoutline</code>. It can best be read as follows. for each risk the line of the corresponding <code>level</code> is used, possibly overrule by the line with the correct <code>description</code> and a explicit <code>TRUE</code> or <code>FALSE</code> present.</p>
 </div>
 </div>
